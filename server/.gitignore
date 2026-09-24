@@ -1,0 +1,23 @@
+node_modules/
+
+.env
+.env.local
+.env.*.local
+
+
+generated-reports/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS / editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Agar future mein tests/coverage add karo
+coverage/
+
+seedAdmin.js

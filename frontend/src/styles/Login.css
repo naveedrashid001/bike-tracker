@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Login page — same "registry / security document" identity as Register,
+   scaled down for a returning user checking back in rather than filing a
+   new intake form. One card, one spine, one accent — nothing extra.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+.auth-page {
+  --auth-ink: #182a21;
+  --auth-muted: #5b6b60;
+  --auth-paper: #eef0e4;
+  --auth-paper-raised: #f6f7ef;
+  --auth-green: #0b4b34;
+  --auth-green-dark: #08321f;
+  --auth-brass: #a9823f;
+  --auth-border: rgba(11, 75, 52, 0.18);
+  --auth-danger: #b42318;
+  --auth-danger-bg: #fbeae7;
+  --auth-radius: 10px;
+
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background-color: var(--auth-paper);
+  background-image: radial-gradient(rgba(11, 75, 52, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ---------- The card ---------- */
+
+.auth-form {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--auth-paper-raised);
+  border: 1px solid var(--auth-border);
+  border-left: 4px solid var(--auth-green);
+  border-radius: var(--auth-radius);
+  box-shadow: 0 1px 0 rgba(11, 75, 52, 0.06);
+  padding: 38px 34px 30px;
+  animation: auth-rise 0.5s ease-out;
+}
+
+/* A quiet brass mark in the corner — the one accessory on this page */
+.auth-form::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--auth-brass);
+}
+
+@keyframes auth-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form { animation: none; }
+}
+
+/* ---------- Heading ---------- */
+
+.auth-form h1 {
+  margin: 0 0 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--auth-border);
+  font-family: 'Spectral', serif;
+  font-weight: 500;
+  font-size: 1.7rem;
+  color: var(--auth-ink);
+}
+
+/* ---------- Server error banner ---------- */
+
+.form-error {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--auth-danger);
+  background: var(--auth-danger-bg);
+  border: 1px solid rgba(180, 35, 24, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+/* ---------- Fields ---------- */
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--auth-ink);
+}
+
+.auth-form input {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  color: var(--auth-ink);
+  background: #fff;
+  border: 1px solid var(--auth-border);
+  border-radius: 7px;
+  padding: 10px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Phone is a registered ID, same as CNIC on the register page — mono type
+   signals "this number is a record", not free text */
+.auth-form input[name='phone'] {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+.auth-form input:focus-visible {
+  outline: none;
+  border-color: var(--auth-green);
+  box-shadow: 0 0 0 3px rgba(11, 75, 34, 0.15);
+}
+
+.field-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: var(--auth-danger);
+}
+
+/* ---------- Submit ---------- */
+
+.auth-form button[type='submit'] {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: #fff;
+  background: var(--auth-green);
+  border: none;
+  border-radius: 7px;
+  padding: 12px 16px;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.auth-form button[type='submit']:hover:not(:disabled) {
+  background: var(--auth-green-dark);
+}
+
+.auth-form button[type='submit']:focus-visible {
+  outline: 2px solid var(--auth-brass);
+  outline-offset: 2px;
+}
+
+.auth-form button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Switch to register ---------- */
+
+.auth-switch {
+  margin: 0;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  color: var(--auth-muted);
+}
+
+.auth-switch a {
+  color: var(--auth-green);
+  font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 420px) {
+  .auth-form {
+    padding: 30px 24px 26px;
+  }
+
+  .auth-form h1 {
+    font-size: 1.45rem;
+  }
+}
